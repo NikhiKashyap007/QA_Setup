@@ -1,21 +1,21 @@
 //enable text log
-!spool C:/doorvest/mapping_data/log.txt;
+!spool mapping_data/log.txt;
 
 //enable variable substitution
 !set variable_substitution=true;
 
 //db file location
-!define db_mapping_file = "C:/doorvest/mapping_data/DBNAME.csv";
+!define db_mapping_file = "mapping_data/DBNAME.csv";
 
 //schema file location
-!define scma_mapping_file = "C:/doorvest/mapping_data/SCHEMANAME.csv";
+!define scma_mapping_file = "mapping_data/SCHEMANAME.csv";
 
 //rbac file location
-!define rbac_mapping_file = "C:/doorvest/mapping_data/RBAC.csv";
+!define rbac_mapping_file = "mapping_data/RBAC.csv";
 
 //warehouse file location
 
-!define wh_mapping_file = "C:/doorvest/mapping_data/WAREHOUSE.csv";
+!define wh_mapping_file = "mapping_data/WAREHOUSE.csv";
 
 USE ROLE SYSADMIN;
 
