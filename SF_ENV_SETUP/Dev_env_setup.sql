@@ -1,4 +1,7 @@
 //temp
-create database if not exists GITHUB_SNOWSQL_TEST_DB;
-use database GITHUB_SNOWSQL_TEST_DB;
-create schema temp_schema;
+
+!source SF_ENV_SETUP/ENV_SETUP_FILES/doorvest_sf_platform_automation_setup_script.sql
+
+!source SF_ENV_SETUP/ENV_SETUP_FILES/doorvest_sf_environment_setup_script.sql
+
+call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA');
