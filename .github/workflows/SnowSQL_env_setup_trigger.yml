@@ -1,0 +1,28 @@
+name: SnowSQL_env_setup_trigger
+env:
+  SNOWSQL_DEST: ~/snowflake
+  SNOWSQL_ACCOUNT: pp68202.ap-southeast-1
+  SNOWSQL_USER: nikhileshkashyap
+  SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
+  
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'SF_ENV_SETUP/**'                                                  
+jobs:                         
+  executequery:                           
+    name: Install SnowSQL                          
+    runs-on: ubuntu-latest                           
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Download SnowSQL
+      run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
+    - name: Install SnowSQL
+      run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
+    - name: Test installation
+      run:  ~/snowflake/snowsql -v
+    - name: Execute SQL against Snowflake
+      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/Dev_env_setup.sql;
