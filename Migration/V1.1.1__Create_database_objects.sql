@@ -1,1 +1,1 @@
-create database github_demo_db;
+create or replace database github_demo_db;
