@@ -1,3 +1,3 @@
-create or replace database github_demo_db;
-use database github_demo_db;
-create schema temp_Schema;
+create or replace database {{ DB_NAME }};
+use database {{ DB_NAME }};
+create schema {{ SCHEMA_NAME }};
