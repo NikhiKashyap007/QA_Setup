@@ -32,7 +32,7 @@ vars:
     var3: 'value3' # This is considered a secret and will not be displayed in any output
 
 # Create the change history schema and table, if they do not exist (the default is False)
-create-change-history-table: false
+create-change-history-table: true
 
 # Enable autocommit feature for DML commands (the default is False)
 autocommit: false
