@@ -1,1 +1,1 @@
-create database temp_db;
+create database if not exists temp_db;
