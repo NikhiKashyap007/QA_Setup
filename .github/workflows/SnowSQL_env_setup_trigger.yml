@@ -9,8 +9,9 @@ on:
   push:
     branches:
       - main
+      - DEV
     paths:
-      - 'SF_ENV_SETUP/**'                                                  
+      - 'SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/'                                                  
 jobs:                         
   executequery:                           
     name: Install SnowSQL                          
@@ -25,4 +26,4 @@ jobs:
     - name: Test installation
       run:  ~/snowflake/snowsql -v
     - name: Execute SQL against Snowflake
-      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/Dev_env_setup.sql;
+      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/ENV_setup_script.sql;
