@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - DEV
+      - main
     paths:
       - 'SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/'                                                  
 jobs:                         
