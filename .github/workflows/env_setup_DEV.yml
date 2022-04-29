@@ -5,20 +5,13 @@ env:
   SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
   SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
   
-  
-
-
+    
 on:
   push:
-    branches:
-      - main
 
-  
     paths:
       - 'SF_ENV_SETUP/' 
-      
-# Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+         
 
 jobs:                         
   executequery:                           
