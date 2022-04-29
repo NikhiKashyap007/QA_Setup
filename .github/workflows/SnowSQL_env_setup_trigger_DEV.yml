@@ -1,4 +1,4 @@
-name: SnowSQL_env_setup_trigger2
+name: SnowSQL_env_setup_trigger_DEV
 env:
   SNOWSQL_DEST: ~/snowflake
   SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
