@@ -7,6 +7,14 @@ root-folder: 'SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/'
 modules-folder: null
 
     
-
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | tr / -)"
+        id: branch
 vars:
-  VAR_ENV: 'QA'
+  VAR_ENV: branch
