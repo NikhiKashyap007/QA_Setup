@@ -37,11 +37,12 @@ jobs:
       - name: Run schemachange
         env:
           
-          STRING1: "secrets."
-          STRING2: "_SF_ACCOUNT"
-          STRING3: "_SF_USERNAME"
-          STRING4: "_SF_PASSWORD"
-          SF_ACCOUNT: ${{ STRING1+GITHUB_ENV+STRING2 }}
+          STRING1: 'secrets.'
+          STRING2: '_SF_ACCOUNT'
+          STRING3: '_SF_USERNAME'
+          STRING4: '_SF_PASSWORD'
+          ACCOUNT: STRING1+STRING2+STRING3
+          SF_ACCOUNT: ${{ ACCOUNT }}
           SF_USERNAME: ${{ STRING1+GITHUB_ENV+STRING3 }}
           SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
