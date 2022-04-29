@@ -28,8 +28,8 @@ jobs:
       - name: Run schemachange
         env:
           SF_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-          SF_USERNAME: ${{ secrets.DEV_USERNAME }}
-          SF_ROLE: ${{ secrets.DEV_SF_ROLE }}
+          SF_USERNAME: ${{ secrets.DEV_SF_USERNAME }}
+          SF_ROLE: ${{ secrets.SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.DEV_SF_PASSWORD }}
