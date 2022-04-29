@@ -25,8 +25,8 @@ jobs:
       - name: Get branch name (merge)
         if: github.event_name != 'pull_request'
         shell: bash
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
-      
+        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | tr / -)"
+        id: branch
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -38,17 +38,12 @@ jobs:
       - name: Run schemachange
         env:
           
-          STRING1: 'secrets.'
-          STRING2: '_SF_ACCOUNT'
-          STRING3: '_SF_USERNAME'
-          STRING4: '_SF_PASSWORD'
-          ACCOUNT: STRING1+STRING2+STRING3
-          SF_ACCOUNT: ${{ ACCOUNT }}
-          SF_USERNAME: ${{ STRING1+GITHUB_ENV+STRING3 }}
+          SF_ACCOUNT: ${{ `secret.`+steps.branch.outputs.BRANCH_NAME+`_SF_ACCOUNT` }}
+          SF_USERNAME: ${{ `secret.`+steps.branch.outputs.BRANCH_NAME+`_SF_USERNAME` }}
           SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
-          SNOWFLAKE_PASSWORD: ${{ STRING1+GITHUB_ENV+STRING4 }}
+          SNOWFLAKE_PASSWORD: ${{ `secret.`+steps.branch.outputs.BRANCH_NAME+`_SF_PASSWORD` }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
