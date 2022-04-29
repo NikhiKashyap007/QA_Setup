@@ -1,4 +1,4 @@
-name: snowflake-devops-demo-DEV
+name: snowflake-devops-demo-DEV2
 
 
 # Controls when the action will run. 
@@ -7,6 +7,7 @@ on:
     branches:
       - DEV
       - main
+      - QA
     paths:
       - 'Migration/**'
 
