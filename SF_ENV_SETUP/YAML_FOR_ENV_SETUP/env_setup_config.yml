@@ -1,7 +1,7 @@
 config-version: 1
 
 # The root folder for the database change scripts
-root-folder: 'Snowflake_Scripts/Automation/SF_ENV_SETUP/Script_to_run/'
+root-folder: 'SF_ENV_SETUP/YAML_FOR_SCHEMACHANGE/'
 
 # The modules folder for jinja macros and templates to be used across multiple scripts.
 modules-folder: null
