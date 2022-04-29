@@ -41,15 +41,12 @@ jobs:
           STRING2: "_SF_ACCOUNT"
           STRING3: "_SF_USERNAME"
           STRING4: "_SF_PASSWORD"
-          ACCOUNT: $STRING1+$GITHUB_ENV+$STRING2
-          USERNAME: $STRING1+$GITHUB_ENV+$STRING3
-          SF_ACCOUNT: ${{ ACCOUNT }}
-          SF_USERNAME: ${{ USERNAME }}
+          SF_ACCOUNT: ${{ $STRING1+$GITHUB_ENV+$STRING2 }}
+          SF_USERNAME: ${{ $STRING1+$GITHUB_ENV+$STRING3 }}
           SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
-          PASSWORD: $STRING1+$GITHUB_ENV+$STRING4
-          SNOWFLAKE_PASSWORD: ${{ PASSWORD }}
+          SNOWFLAKE_PASSWORD: ${{ $STRING1+$GITHUB_ENV+$STRING4 }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
