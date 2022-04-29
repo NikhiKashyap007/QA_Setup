@@ -1,7 +1,7 @@
 config-version: 1
 
 # The root folder for the database change scripts
-root-folder: 'SF_ENV_SETUP/YAML_FOR_SCHEMACHANGE/'
+root-folder: 'SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/'
 
 # The modules folder for jinja macros and templates to be used across multiple scripts.
 modules-folder: null
