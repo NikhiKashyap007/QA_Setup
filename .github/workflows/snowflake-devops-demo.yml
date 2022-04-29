@@ -40,4 +40,4 @@ jobs:
           pip install schemachange
           
           echo "Step 2: Running schemachange"
-          schemachange --config-folder SF_ENV_SETUP/YAML_FOR_SCHEMACHANGE -f $GITHUB_WORKSPACE/Migration -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
+          schemachange --config-folder SF_ENV_SETUP/YAML_FOR_SCHEMACHANGE -f $GITHUB_WORKSPACE/Migration -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $VAR_SCHEMACHANGE_TABLE --create-change-history-table
