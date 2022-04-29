@@ -38,7 +38,7 @@ jobs:
       - name: Run schemachange
         env:
           
-          SF_ACCOUNT: ${{ `secret.`+steps.branch.outputs.BRANCH_NAME+`_SF_ACCOUNT` }}
+          SF_ACCOUNT: ${{ lookup('secret', stps.branch.outputss.BRANCH_NAME+'_SF_ACCOUNT') }}
           SF_USERNAME: ${{ `secret.`+steps.branch.outputs.BRANCH_NAME+`_SF_USERNAME` }}
           SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
