@@ -28,7 +28,7 @@ jobs:
       - name: Run schemachange
         env:
           SF_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-          SF_USERNAME: ${{ secrets.DEV__USERNAME }}
+          SF_USERNAME: ${{ secrets.DEV_USERNAME }}
           SF_ROLE: ${{ secrets.DEV_SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
