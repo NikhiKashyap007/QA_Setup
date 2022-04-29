@@ -29,7 +29,7 @@ jobs:
         env:
           SF_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.DEV_SF_USERNAME }}
-          SF_ROLE: 'SYSADMIN'
+          SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.DEV_SF_PASSWORD }}
