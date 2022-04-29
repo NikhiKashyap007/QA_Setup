@@ -28,6 +28,7 @@ change-history-table: null
 vars:
   DB_NAME: 'SCHEMACHANGE_DB'
   SCHEMA_NAME: 'SCHEMACHANGE_SCHEMA'
+  VAR_SCHEMACHANGE_TABLE: 'AUTOMATION_FRAMEWORK_DB.QA_SCHEMACHANGE.CHANGE_HISTORY_TABLE_MONDAY'
   secrets:
     var3: 'value3' # This is considered a secret and will not be displayed in any output
 
