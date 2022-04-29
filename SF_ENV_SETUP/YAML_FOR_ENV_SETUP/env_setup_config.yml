@@ -16,4 +16,4 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 vars:
-  VAR_ENV: $GITHUB_ENV
+  VAR_ENV: BRANCH_NAME
