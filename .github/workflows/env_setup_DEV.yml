@@ -33,5 +33,5 @@ jobs:
       run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
     - name: Test installation
       run:  ~/snowflake/snowsql -v
-    - name: Execute SQL against Snowflake
+#    - name: Execute SQL against Snowflake
 #      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/Dev_env_setup.sql;
