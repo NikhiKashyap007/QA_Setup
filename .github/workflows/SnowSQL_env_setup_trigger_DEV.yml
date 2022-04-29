@@ -8,8 +8,7 @@ env:
 on:
   push:
     branches:
-      - DEV
-      - dev
+      - DEV2
     paths:
       - 'SF_ENV_SETUP/SCRIPT_FOR_ENV_SETUP/'                                                  
 jobs:                         
