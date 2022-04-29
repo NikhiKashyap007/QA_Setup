@@ -1,0 +1,11 @@
+config-version: 1
+
+# The root folder for the database change scripts
+root-folder: 'Snowflake_Scripts/Automation/SF_ENV_SETUP/Script_to_run/'
+
+# The modules folder for jinja macros and templates to be used across multiple scripts.
+modules-folder: null
+
+# Define values for the variables to replaced in change scripts
+vars:
+  VAR_ENV: ${{ github.ref_name }}
