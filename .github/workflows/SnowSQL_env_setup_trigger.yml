@@ -1,9 +1,9 @@
 name: SnowSQL_env_setup_trigger
 env:
   SNOWSQL_DEST: ~/snowflake
-  SNOWSQL_ACCOUNT: pp68202.ap-southeast-1
-  SNOWSQL_USER: nikhileshkashyap
-  SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
+  SNOWSQL_ACCOUNT: ${{ "secrets." + ${{ github.ref_name }} + "SF_ACCOUNT" }}
+  SNOWSQL_USER: ${{ "secrets." + ${{ github.ref_name }} + "SF_USERNAME" }}
+  SNOWSQL_PWD: ${{ "secrets." + ${{ github.ref_name }} + "SF_PASSWORD" }}
   
 on:
   push:
