@@ -1,15 +1,24 @@
 name: snowflake-devops-demo-DEV
 
+
 # Controls when the action will run. 
 on:
   push:
     branches:
       - DEV
+      - main
     paths:
       - 'Migration/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  
+
+steps:
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 
 jobs:
   deploy-snowflake-changes-job:
@@ -17,6 +26,12 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+      
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -27,12 +42,12 @@ jobs:
 
       - name: Run schemachange
         env:
-          SF_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-          SF_USERNAME: ${{ secrets.DEV_SF_USERNAME }}
+          SF_ACCOUNT: ${{ "secrets."+$GITHUB_ENV+"_SF_ACCOUNT" }}
+          SF_USERNAME: ${{ "secrets."+$GITHUB_ENV+"_SF_USERNAME" }}
           SF_ROLE: 'ACCOUNTADMIN'
           SF_WAREHOUSE: 'COMPUTE_WH'
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.DEV_SF_PASSWORD }}
+          SNOWFLAKE_PASSWORD: ${{ "secrets."+$GITHUB_ENV+"_SF_PASSWORD" }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
