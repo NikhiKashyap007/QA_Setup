@@ -24,7 +24,7 @@ jobs:
       id: extract_branch
     
     - name: env_variable_set_dev
-      if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
+      if: ${{ steps.extract_branch.outputs.branch == 'main' }}
       env:
         SNOWSQL_DEST: ~/snowflake
         SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
