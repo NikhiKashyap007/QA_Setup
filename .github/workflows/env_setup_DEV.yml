@@ -1,10 +1,5 @@
 name: env_setup_DEV
-env:
-  SNOWSQL_DEST: ~/snowflake
-  SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-  SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
-  SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
-  
+
     
 on:
   push:
@@ -18,8 +13,29 @@ on:
 jobs:                         
   executequery:                           
     name: Install SnowSQL                          
-    runs-on: ubuntu-latest                           
+    runs-on: ubuntu-latest  
+  
     steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    
+    - name: env_variable_set_dev
+      if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
+      env:
+        SNOWSQL_DEST: ~/snowflake
+        SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
+    
+    - name: env_variable_set_QA
+      if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
+      env:
+        SNOWSQL_DEST: ~/snowflake
+        SNOWSQL_ACCOUNT: ${{ secrets.QA_SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.QA_SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.QA_SF_PASSWORD }}    
     - name: Checkout
       uses: actions/checkout@master
     - name: Download SnowSQL
@@ -28,5 +44,14 @@ jobs:
       run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
     - name: Test installation
       run:  ~/snowflake/snowsql -v
-#    - name: Execute SQL against Snowflake
-#      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/Dev_env_setup.sql;
+      
+    - name: Execute SQL against Snowflake
+      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql;
+    - name: call the stored procedure for DEV
+      if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
+      run: call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV');
+    - name: call the stored procedure for QA
+      if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
+      run: call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA');
+      
+
