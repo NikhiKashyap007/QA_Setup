@@ -54,9 +54,9 @@ jobs:
       run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql;
     - name: call the stored procedure for DEV
       if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
-      run: call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV');
+      run: ~/snowflake/snowsql call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV');
     - name: call the stored procedure for QA
       if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
-      run: call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA');
+      run: ~/snowflake/snowsql call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA');
       
 
