@@ -76,7 +76,7 @@ jobs:
           
       
       - name: Run schemachange PROD
-        if: ${{ steps.extract_branch.outputs.branch == 'PROD' }}
+        if: ${{ steps.extract_branch.outputs.branch == 'main' }}
         env:
           SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
