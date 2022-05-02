@@ -51,7 +51,7 @@ jobs:
       run:  ~/snowflake/snowsql -v
       
     - name: Execute SQL against Snowflake
-      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql;
+      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql -o log_level=DEBUG;
     - name: call the stored procedure for DEV
       if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
       run: call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV');
