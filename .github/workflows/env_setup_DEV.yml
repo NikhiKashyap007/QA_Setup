@@ -8,7 +8,8 @@ env:
     
 on:
   push:
-    branches: main
+    branches: 
+      - main
 
     paths:
       - 'SF_ENV_SETUP/' 
