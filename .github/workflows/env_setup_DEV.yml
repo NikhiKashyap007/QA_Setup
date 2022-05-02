@@ -39,6 +39,7 @@ jobs:
         SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash ;
         ~/snowflake/snowsql -v ;
         ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql; 
+        ~/snowflake/snow -q "use warehouse AUTOMATION_FRAMEWORK_WH";
         ~/snowflake/snowsql -q "call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV')";
         
      
