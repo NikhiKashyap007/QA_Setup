@@ -56,6 +56,22 @@ jobs:
         ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql; 
         ~/snowflake/snowsql -q "use warehouse AUTOMATION_FRAMEWORK_WH; call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA')";
         
+        
+        
+    - name: env_variable_set_main
+      if: ${{ steps.extract_branch.outputs.branch == 'main' }}
+      env:
+        SNOWSQL_DEST: ~/snowflake
+        SNOWSQL_ACCOUNT: ${{ secrets.QA_SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.QA_SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.QA_SF_PASSWORD }}    
+      run: | 
+        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash ;
+        SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash ;
+        ~/snowflake/snowsql -v ;
+        ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql; 
+        ~/snowflake/snowsql -q "use warehouse AUTOMATION_FRAMEWORK_WH; call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('PROD')";
+    
     
    
 
