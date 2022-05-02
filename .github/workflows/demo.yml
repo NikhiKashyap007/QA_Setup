@@ -57,12 +57,12 @@ jobs:
       - name: Run schemachange = QA
         if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
         env:
-          SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SF_ACCOUNT: ${{ secrets.QA_SF_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.QA_SF_USERNAME }}
           SF_ROLE: ${{ secrets.SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.QA_SF_PASSWORD }}
           
         
         run: |
