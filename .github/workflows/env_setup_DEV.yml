@@ -1,15 +1,12 @@
 name: env_setup_DEV
-env:
-  SNOWSQL_DEST: ~/snowflake
-  SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-  SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
-  SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
-  
+
     
 on:
   push:
     branches: 
       - main
+      - DEV
+      - QA
 
     paths:
       - 'SF_ENV_SETUP/ENV_SETUP_SCRIPTS/**' 
@@ -18,15 +15,47 @@ on:
 jobs:                         
   executequery:                           
     name: Install SnowSQL                          
-    runs-on: ubuntu-latest                           
+    runs-on: ubuntu-latest  
+  
     steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+      
     - name: Checkout
       uses: actions/checkout@master
-    - name: Download SnowSQL
-      run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
-    - name: Install SnowSQL
-      run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
-    - name: Test installation
-      run:  ~/snowflake/snowsql -v
-    - name: Execute SQL against Snowflake
-      run:  ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql;
+    
+    - name: env_variable_set_dev
+      if: ${{ steps.extract_branch.outputs.branch == 'main' }}
+      env:
+        SNOWSQL_DEST: ~/snowflake
+        SNOWSQL_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
+
+      run: | 
+        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash ;
+        SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash ;
+        ~/snowflake/snowsql -v ;
+        ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql; 
+        ~/snowflake/snowsql -q "use warehouse AUTOMATION_FRAMEWORK_WH; call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('DEV')";
+        
+     
+    - name: env_variable_set_QA
+      if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
+      env:
+        SNOWSQL_DEST: ~/snowflake
+        SNOWSQL_ACCOUNT: ${{ secrets.QA_SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.QA_SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.QA_SF_PASSWORD }}    
+      run: | 
+        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash ;
+        SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash ;
+        ~/snowflake/snowsql -v ;
+        ~/snowflake/snowsql -f $GITHUB_WORKSPACE/SF_ENV_SETUP/ENV_SETUP_SCRIPTS/Env_setup_script.sql; 
+        ~/snowflake/snowsql -q "use warehouse AUTOMATION_FRAMEWORK_WH; call AUTOMATION_FRAMEWORK_DB.AFW_SCMA.P_AFW_SETUP('QA')";
+        
+    
+   
+
