@@ -5,9 +5,11 @@ on:
   push:
     branches: 
       - main
+      - DEV
+      - QA
 
     paths:
-      - 'SF_ENV_SETUP/**' 
+      - 'SF_ENV_SETUP/ENV_SETUP_SCRIPTS/**' 
          
 
 jobs:                         
