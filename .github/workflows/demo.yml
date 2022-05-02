@@ -34,7 +34,7 @@ jobs:
           python-version: 3.8.x
    
       - name: Run schemachange for DEV
-        if: ${{ steps.extract_branch.outputs.branch='DEV' }}
+        if: ${{ steps.extract_branch.outputs.branch == 'DEV' }}
         env:
           SF_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.DEV_SF_USERNAME }}
@@ -55,7 +55,7 @@ jobs:
           
         
       - name: Run schemachange = QA
-        if: ${{ steps.extract_branch.outputs.branch='QA' }}
+        if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
         env:
           SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
@@ -76,7 +76,7 @@ jobs:
           
       
       - name: Run schemachange PROD
-        if: ${{ steps.extract_branch.outputs.branch='PROD' }}
+        if: ${{ steps.extract_branch.outputs.branch == 'PROD' }}
         env:
           SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
