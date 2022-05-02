@@ -30,6 +30,7 @@ jobs:
         SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
         SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
         SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
+      run: echo "abc"  
     
     - name: env_variable_set_QA
       if: ${{ steps.extract_branch.outputs.branch == 'QA' }}
@@ -38,6 +39,8 @@ jobs:
         SNOWSQL_ACCOUNT: ${{ secrets.QA_SF_ACCOUNT }}
         SNOWSQL_USER: ${{ secrets.QA_SF_USERNAME }}
         SNOWSQL_PWD: ${{ secrets.QA_SF_PASSWORD }}    
+      run: echo "abc"    
+    
     - name: Checkout
       uses: actions/checkout@master
     - name: Download SnowSQL
