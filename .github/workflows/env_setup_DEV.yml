@@ -27,9 +27,9 @@ jobs:
       if: ${{ steps.extract_branch.outputs.branch == 'main' }}
       env:
         SNOWSQL_DEST: ~/snowflake
-        SNOWSQL_ACCOUNT: ${{ secrets.DEV_SF_ACCOUNT }}
-        SNOWSQL_USER: ${{ secrets.DEV_SF_USERNAME }}
-        SNOWSQL_PWD: ${{ secrets.DEV_SF_PASSWORD }}
+        SNOWSQL_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.SF_USERNAME }}
+        SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
       run: echo "abc"  
     
     - name: env_variable_set_QA
