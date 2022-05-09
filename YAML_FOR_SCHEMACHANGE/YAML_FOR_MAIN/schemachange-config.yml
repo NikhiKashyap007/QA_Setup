@@ -5,7 +5,7 @@ root-folder: 'Migration/'
 
 
 # Define values for the variables to replaced in change scripts
-if: '{{ env_var('BRANCH_NAME_FOR_CONFIG') }}' == 'main'
+if: {{ env_var('BRANCH_NAME_FOR_CONFIG') }} == main
 then:
   vars:
     VAR_LOAD_DB: 'GLOBAL_LOAD_DB'
