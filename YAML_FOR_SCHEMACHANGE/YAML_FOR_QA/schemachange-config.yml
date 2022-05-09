@@ -5,9 +5,9 @@ root-folder: 'Migration/'
 
 
 # Define values for the variables to replaced in change scripts
-vars:
-
-  
+if {{ env_var('BRANCH_NAME_FOR_CONFIG') }} == 'QA'
+then:
+ vars:  
   VAR_LOAD_DB: 'GLOBAL_QA_LOAD_DB'
   VAR_LOAD_MONDAY_SCHEMA: 'GLOBAL_LOAD_MONDAY_SCMA'
   VAR_REPORTING_DB: 'GLOBAL_QA_REPORTING_DB'
