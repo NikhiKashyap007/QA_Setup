@@ -85,7 +85,7 @@ jobs:
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          
+          BRANCH_NAME_FOR_CONFIG: ${{ steps.extract_branch.outputs.branch }}
         
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
