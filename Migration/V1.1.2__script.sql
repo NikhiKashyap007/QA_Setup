@@ -4,3 +4,5 @@ create schema if not exists temp_schema2;
 
 create schema if not exists temp_schema2;
 
+create schema if not exists temp_schema2;
+
